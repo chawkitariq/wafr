@@ -18,13 +18,13 @@ comme PWA, exportable en image pour une viralité WhatsApp/Instagram.
 
 | Feature | Description | Statut |
 |---------|-------------|--------|
-| F1 | Simulateur principal (sliders, calcul temps réel) | À faire |
-| F2 | Graphique interactif ECharts | À faire |
-| F3 | Cartes résultats (3 scénarios) | À faire |
-| F4 | Bilingue FR/AR avec RTL | À faire |
-| F5 | Export PNG (html2canvas) | À faire |
-| F6 | Partage via URL (query params) | À faire |
-| F7 | PWA installable + offline | À faire |
+| F1 | Simulateur principal (sliders, calcul temps réel) | Terminé |
+| F2 | Graphique interactif ECharts | Terminé |
+| F3 | Cartes résultats (3 scénarios) | Terminé |
+| F4 | Bilingue FR/AR avec RTL | Terminé |
+| F5 | Export PNG (html2canvas) | Terminé |
+| F6 | Partage via URL (query params) | Terminé |
+| F7 | PWA installable + offline | En cours (icônes manquantes, tests mobiles) |
 
 ### V2 — Extension (2-3 mois)
 **Objectif business :** Monétisation freemium, 79 MAD/mois premium.

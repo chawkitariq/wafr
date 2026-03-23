@@ -1,0 +1,45 @@
+{
+  "app": {
+    "title": "Wafr",
+    "tagline": "وفر",
+    "subtitle": "Simulateur d'investissement marocain",
+    "description": "Comparez l'épargne bancaire, l'immobilier et la Bourse de Casablanca. Visualisez la puissance des intérêts composés.",
+    "disclaimer": "Simulation à titre indicatif. Les rendements passés ne garantissent pas les rendements futurs. Taux basés sur les moyennes historiques 2015–2024."
+  },
+  "simulator": {
+    "title": "Votre simulation",
+    "monthlyDeposit": "Épargne mensuelle",
+    "initialCapital": "Capital de départ",
+    "years": "Durée",
+    "yearsUnit": "ans | an | ans",
+    "mad": "MAD"
+  },
+  "scenarios": {
+    "bvc": "Bourse de Casablanca",
+    "immo": "Immobilier",
+    "epargne": "Épargne bancaire",
+    "bvcRate": "9 %/an",
+    "immoRate": "6 %/an",
+    "epargneRate": "3,5 %/an"
+  },
+  "results": {
+    "title": "Résultats après {years} ans",
+    "finalAmount": "Capital final",
+    "gains": "Gains",
+    "multiplier": "Multiplicateur",
+    "gainPercent": "Rendement total",
+    "invested": "Capital investi",
+    "bestOption": "Meilleure option"
+  },
+  "chart": {
+    "title": "Évolution du capital",
+    "invested": "Capital investi",
+    "year": "Année {n}"
+  },
+  "actions": {
+    "export": "Exporter en PNG",
+    "shareUrl": "Copier le lien",
+    "copied": "Lien copié !",
+    "exporting": "Export…"
+  }
+}

@@ -7,6 +7,17 @@
     "security-guidance@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true,
-    "chrome-devtools-mcp@claude-plugins-official": true
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "code-refactorer@devsforge-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "devsforge-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "claudeforge/marketplace"
+      }
+    }
   }
 }
