@@ -1,6 +1,11 @@
 {
   "version": 1,
   "skills": {
+    "code-documentation": {
+      "source": "smithery.ai",
+      "sourceType": "well-known",
+      "computedHash": "db999014274d1defddde9f98da0c2b498241b73798050baf3a3971309134868c"
+    },
     "nuxt-ui": {
       "source": "nuxt/ui",
       "sourceType": "github",
