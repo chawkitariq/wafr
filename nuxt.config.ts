@@ -5,7 +5,6 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/i18n',
     '@vite-pwa/nuxt',
-    'nuxt-echarts',
     '@nuxt/test-utils/module'
   ],
 
@@ -29,11 +28,6 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: ['html-to-image']
     }
-  },
-
-  echarts: {
-    charts: ['LineChart'],
-    components: ['GridComponent', 'TooltipComponent', 'LegendComponent']
   },
 
   eslint: {

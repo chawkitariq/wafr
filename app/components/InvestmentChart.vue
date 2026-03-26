@@ -1,122 +1,114 @@
 <script setup lang="ts">
 import type { SimulationResults } from '~/utils/simulator'
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend,
+  Filler
+} from 'chart.js'
+import { Line } from 'vue-chartjs'
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler)
 
 const props = defineProps<{
   results: SimulationResults
   years: number
 }>()
 
-const { t, locale } = useI18n()
-
-const isRtl = computed(() => locale.value === 'ar')
-
-function formatNumber(value: number) {
-  if (value >= 1_000_000) return (value / 1_000_000).toFixed(1) + 'M'
-  if (value >= 1_000) return Math.round(value / 1_000) + 'k'
-  return String(value)
-}
+const { t } = useI18n()
 
 function formatMAD(value: number) {
   return new Intl.NumberFormat('fr-MA').format(Math.round(value)) + ' MAD'
 }
 
-const chartOption = computed(() => {
+const chartData = computed(() => {
   const data = props.results.yearlyData
-  const years = data.map(d => d.year)
-
   return {
-    backgroundColor: 'transparent',
-    tooltip: {
-      trigger: 'axis',
-      confine: true,
-      formatter: (params: any[]) => {
-        const year = params[0].axisValue
-        let html = `<div style="font-size:12px;font-weight:600;margin-bottom:6px">${t('chart.year', { n: year })}</div>`
-        params.forEach((p: any) => {
-          html += `<div style="display:flex;justify-content:space-between;gap:16px;margin:2px 0">
-            <span>${p.marker}${p.seriesName}</span>
-            <span style="font-weight:700">${formatMAD(p.value)}</span>
-          </div>`
-        })
-        return html
-      }
-    },
-    legend: {
-      bottom: 0,
-      itemWidth: 14,
-      itemHeight: 3,
-      textStyle: { fontSize: 11 }
-    },
-    grid: {
-      top: 16,
-      bottom: 56,
-      left: isRtl.value ? 20 : 16,
-      right: isRtl.value ? 16 : 20,
-      containLabel: true
-    },
-    xAxis: {
-      type: 'category',
-      data: years,
-      axisLabel: {
-        fontSize: 11,
-        formatter: (val: number) => val === 0 ? '0' : `${val}`
-      },
-      axisLine: { lineStyle: { color: '#e5e7eb' } },
-      axisTick: { show: false }
-    },
-    yAxis: {
-      type: 'value',
-      axisLabel: {
-        fontSize: 10,
-        formatter: formatNumber
-      },
-      splitLine: { lineStyle: { color: '#f3f4f6', type: 'dashed' } }
-    },
-    series: [
+    labels: data.map(d => d.year),
+    datasets: [
       {
-        name: t('scenarios.bvc'),
-        type: 'line',
+        label: t('scenarios.bvc'),
         data: data.map(d => d.bvc),
-        smooth: true,
-        color: '#10b981',
-        lineStyle: { width: 2.5 },
-        symbol: 'none',
-        emphasis: { focus: 'series' }
+        borderColor: '#10b981',
+        borderWidth: 2.5,
+        tension: 0.4,
+        pointRadius: 0,
+        pointHoverRadius: 4
       },
       {
-        name: t('scenarios.immo'),
-        type: 'line',
+        label: t('scenarios.immo'),
         data: data.map(d => d.immo),
-        smooth: true,
-        color: '#3b82f6',
-        lineStyle: { width: 2.5 },
-        symbol: 'none',
-        emphasis: { focus: 'series' }
+        borderColor: '#3b82f6',
+        borderWidth: 2.5,
+        tension: 0.4,
+        pointRadius: 0,
+        pointHoverRadius: 4
       },
       {
-        name: t('scenarios.epargne'),
-        type: 'line',
+        label: t('scenarios.epargne'),
         data: data.map(d => d.epargne),
-        smooth: true,
-        color: '#f59e0b',
-        lineStyle: { width: 2.5 },
-        symbol: 'none',
-        emphasis: { focus: 'series' }
+        borderColor: '#f59e0b',
+        borderWidth: 2.5,
+        tension: 0.4,
+        pointRadius: 0,
+        pointHoverRadius: 4
       },
       {
-        name: t('chart.invested'),
-        type: 'line',
+        label: t('chart.invested'),
         data: data.map(d => d.invested),
-        smooth: false,
-        color: '#9ca3af',
-        lineStyle: { width: 1.5, type: 'dashed' },
-        areaStyle: { color: 'rgba(156,163,175,0.08)' },
-        symbol: 'none',
-        emphasis: { focus: 'series' }
+        borderColor: '#9ca3af',
+        borderWidth: 1.5,
+        borderDash: [6, 3],
+        tension: 0,
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        fill: true,
+        backgroundColor: 'rgba(156,163,175,0.08)'
       }
     ]
   }
 })
+
+const chartOptions = computed(() => ({
+  responsive: true,
+  maintainAspectRatio: false,
+  interaction: { mode: 'index' as const, intersect: false },
+  plugins: {
+    legend: {
+      position: 'bottom' as const,
+      labels: { boxWidth: 14, boxHeight: 3, font: { size: 11 } }
+    },
+    tooltip: {
+      callbacks: {
+        title: (items: any[]) => t('chart.year', { n: items[0].label }),
+        label: (item: any) => ` ${item.dataset.label}: ${formatMAD(item.raw)}`
+      }
+    }
+  },
+  scales: {
+    x: {
+      grid: { display: false },
+      ticks: { font: { size: 11 } },
+      border: { color: '#e5e7eb' }
+    },
+    y: {
+      grid: { color: '#f3f4f6' },
+      ticks: {
+        font: { size: 10 },
+        callback: (value: number | string) => {
+          const v = Number(value)
+          if (v >= 1_000_000) return (v / 1_000_000).toFixed(1) + 'M'
+          if (v >= 1_000) return Math.round(v / 1_000) + 'k'
+          return String(v)
+        }
+      }
+    }
+  }
+}))
 </script>
 
 <template>
@@ -125,12 +117,9 @@ const chartOption = computed(() => {
       {{ t('chart.title') }}
     </h3>
     <ClientOnly>
-      <VChart
-        :option="chartOption"
-        :init-options="{ renderer: 'svg' }"
-        autoresize
-        class="h-72 w-full sm:h-96"
-      />
+      <div class="h-72 w-full sm:h-96">
+        <Line :data="chartData" :options="chartOptions" />
+      </div>
       <template #fallback>
         <div class="flex h-72 items-center justify-center">
           <UIcon
