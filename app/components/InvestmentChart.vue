@@ -24,6 +24,7 @@ const props = defineProps<{
 
 const { t } = useI18n()
 
+// Shorthand thresholds for Y-axis tick formatting (see callback below)
 const K = 1_000
 const M = 1_000_000
 
@@ -60,6 +61,8 @@ const chartData = computed(() => {
         pointHoverRadius: 4
       },
       {
+        // Dashed "total invested" baseline — fill shades the area below it so users
+        // can visually compare compounded growth against simple capital injection
         label: t('chart.invested'),
         data: data.map(d => d.invested),
         borderColor: '#9ca3af',
