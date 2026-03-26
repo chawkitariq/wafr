@@ -1,60 +1,57 @@
-# Nuxt Starter Template
+# Wafr — وفر
 
-[![Nuxt UI](https://img.shields.io/badge/Made%20with-Nuxt%20UI-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com)
+A bilingual (FR/AR) savings & investment simulator for the Moroccan market. Compare three investment vehicles — Casablanca Stock Exchange, real estate, and bank savings — and visualize the power of compound interest over time.
 
-Use this template to get started with [Nuxt UI](https://ui.nuxt.com) quickly.
+**Live:** [wafr.ma](https://wafr.ma) &nbsp;|&nbsp; **Stack:** Nuxt 3, TypeScript, Nuxt UI, ECharts, PWA
 
-- [Live demo](https://starter-template.nuxt.dev/)
-- [Documentation](https://ui.nuxt.com/docs/getting-started/installation/nuxt)
+---
 
-<a href="https://starter-template.nuxt.dev/" target="_blank">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png">
-    <img alt="Nuxt Starter Template" src="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png" width="830" height="466">
-  </picture>
-</a>
+## What it does
 
-> The starter template for Vue is on https://github.com/nuxt-ui-templates/starter-vue.
+- Input your monthly deposit, initial capital, and time horizon using sliders
+- See real-time projections across 3 scenarios (BVC 9%, Immobilier 6%, Épargne 3.5%)
+- Switch between French and Arabic (RTL) with one click
+- Export results as a PNG image to share on WhatsApp/Instagram
+- Share your simulation via URL (query params, no account needed)
+- Install as a PWA on mobile for offline access
 
-## Quick Start
+---
 
-```bash [Terminal]
-npm create nuxt@latest -- -t ui
-```
+## Prerequisites
 
-## Deploy your own
+- [Node.js](https://nodejs.org/) v18+
+- [pnpm](https://pnpm.io/) (`npm install -g pnpm`)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-name=starter&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fstarter&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fstarter-dark.png&demo-url=https%3A%2F%2Fstarter-template.nuxt.dev%2F&demo-title=Nuxt%20Starter%20Template&demo-description=A%20minimal%20template%20to%20get%20started%20with%20Nuxt%20UI.)
+---
 
 ## Setup
 
-Make sure to install the dependencies:
-
 ```bash
+# Clone the repo
+git clone https://github.com/your-username/wafr.git
+cd wafr
+
+# Install dependencies
 pnpm install
 ```
 
-## Development Server
+---
 
-Start the development server on `http://localhost:3000`:
+## Running locally
 
 ```bash
 pnpm dev
 ```
 
-## Production
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Build the application for production:
+---
 
-```bash
-pnpm build
-```
+## Other commands
 
-Locally preview production build:
-
-```bash
-pnpm preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+| Command | Description |
+|---------|-------------|
+| `pnpm build` | Build for production |
+| `pnpm preview` | Preview the production build locally |
+| `pnpm vitest run` | Run unit tests |
+| `pnpm playwright test` | Run end-to-end tests |
