@@ -14,18 +14,14 @@ async function exportPng() {
   if (exporting.value) return
   exporting.value = true
   try {
-    const html2canvas = (await import('html2canvas')).default
+    const { toPng } = await import('html-to-image')
     const el = document.getElementById('simulator-export')
     if (!el) return
-    const canvas = await html2canvas(el, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: null
-    })
+    const dataUrl = await toPng(el, { pixelRatio: 2 })
     const link = document.createElement('a')
     const date = new Date().toISOString().split('T')[0]
     link.download = `wafr-simulation-${date}.png`
-    link.href = canvas.toDataURL('image/png')
+    link.href = dataUrl
     link.click()
   } finally {
     exporting.value = false

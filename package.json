@@ -17,7 +17,7 @@
     "@nuxt/ui": "^4.5.1",
     "@nuxtjs/i18n": "10.2.3",
     "@vite-pwa/nuxt": "1.1.1",
-    "html2canvas": "^1.4.1",
+    "html-to-image": "^1.11.13",
     "nuxt": "^4.4.2",
     "nuxt-echarts": "1.0.1",
     "tailwindcss": "^4.2.1"

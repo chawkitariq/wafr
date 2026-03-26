@@ -3,7 +3,7 @@
 @SPECS.md
 
 ## Règles absolues (ne jamais enfreindre)
-2. `html2canvas` : dynamic import `() => import('html2canvas')` client uniquement, jamais SSR
+2. `html-to-image` : dynamic import `() => import('html-to-image')` client uniquement, jamais SSR
 3. `VChart` : toujours dans `<ClientOnly>`
 4. Toutes les strings UI via `useI18n()`, jamais hardcodées dans les templates
 5. Tous les montants affichés passent par `Math.round()`

@@ -21,7 +21,7 @@ comme PWA, exportable en image pour une viralité WhatsApp/Instagram.
 | F2 | Graphique interactif ECharts | Terminé |
 | F3 | Cartes résultats (3 scénarios) | Terminé |
 | F4 | Bilingue FR/AR avec RTL | Terminé |
-| F5 | Export PNG (html2canvas) | Terminé |
+| F5 | Export PNG (html-to-image) | Terminé |
 | F6 | Partage via URL (query params) | Terminé |
 | F7 | PWA installable + offline | En cours (icônes manquantes, tests mobiles) |
 
@@ -73,7 +73,7 @@ export const RATES = {
 
 ### Contraintes absolues
 
-2. `html2canvas` : dynamic import `() => import('html2canvas')` côté client uniquement, jamais SSR
+2. `html-to-image` : dynamic import `() => import('html-to-image')` côté client uniquement, jamais SSR
 3. `VChart` : toujours dans `<ClientOnly>` pour éviter les erreurs SSR
 4. Toutes les strings UI via `useI18n()`, jamais hardcodées dans les templates
 5. Tous les montants affichés passent par `Math.round()`
@@ -116,7 +116,7 @@ wafr/
 
 | Décision | Justification |
 |----------|---------------|
-| ECharts en SVG (pas canvas) | Export PNG propre via html2canvas sur un SVG |
+| ECharts en SVG (pas canvas) | Export PNG propre via html-to-image sur un SVG |
 | Taux hardcodés (pas d'API BVC) | Simplicité MVP, pas de dépendance externe, révision manuelle annuelle |
 | Arabe MSA (pas darija) | Portabilité international, accessibilité aux non-marocains |
 | Query params pour le partage | Pas de base de données nécessaire, URL courte, fonctionne offline |
@@ -135,7 +135,7 @@ wafr/
 | nuxt-echarts + VChart | Graphiques | ECharts = SVG natif, parfait pour export PNG |
 | @nuxtjs/i18n | Internationalisation | RTL automatique, lazy loading locales |
 | @vite-pwa/nuxt | PWA | Installable mobile, offline first |
-| html2canvas | Export PNG | Client-only, dynamic import, pas de serveur |
+| html-to-image | Export PNG | Client-only, dynamic import, pas de serveur |
 | vitest | Tests unitaires | Compatible Vite, rapide |
 | playwright | Tests e2e | Cross-browser, simule mobile |
 | pnpm | Package manager | Performances, workspace |
