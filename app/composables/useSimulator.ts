@@ -1,5 +1,5 @@
 import { calculateResults } from '~/utils/simulator'
-import type { SimulationResults } from '~/utils/simulator'
+import { SIMULATOR_BOUNDS, COPY_FEEDBACK_MS } from '~/utils/constants'
 
 export const useSimulator = () => {
   const route = useRoute()
@@ -14,9 +14,9 @@ export const useSimulator = () => {
     const s = Number(route.query.s)
     const c = Number(route.query.c)
     const y = Number(route.query.y)
-    if (s >= 100 && s <= 20000) monthlyDeposit.value = s
-    if (c >= 0 && c <= 200000) initialCapital.value = c
-    if (y >= 1 && y <= 30) years.value = y
+    if (s >= SIMULATOR_BOUNDS.monthly.min && s <= SIMULATOR_BOUNDS.monthly.max) monthlyDeposit.value = s
+    if (c >= SIMULATOR_BOUNDS.capital.min && c <= SIMULATOR_BOUNDS.capital.max) initialCapital.value = c
+    if (y >= SIMULATOR_BOUNDS.years.min && y <= SIMULATOR_BOUNDS.years.max) years.value = y
   })
 
   // Sync params to URL
@@ -24,7 +24,7 @@ export const useSimulator = () => {
     router.replace({ query: { s, c, y } })
   })
 
-  const results = computed<SimulationResults>(() =>
+  const results = computed(() =>
     calculateResults({
       monthlyDeposit: monthlyDeposit.value,
       initialCapital: initialCapital.value,
@@ -37,7 +37,9 @@ export const useSimulator = () => {
     if (import.meta.client) {
       await navigator.clipboard.writeText(window.location.href)
       copied.value = true
-      setTimeout(() => { copied.value = false }, 2500)
+      setTimeout(() => {
+        copied.value = false
+      }, COPY_FEEDBACK_MS)
     }
   }
 

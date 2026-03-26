@@ -65,6 +65,12 @@ function buildResult(finalBalance: number, totalInvested: number): ScenarioResul
   }
 }
 
+export function getBestScenario(results: SimulationResults): ScenarioKey {
+  if (results.bvc.finalAmount >= results.immo.finalAmount && results.bvc.finalAmount >= results.epargne.finalAmount) return 'bvc'
+  if (results.immo.finalAmount >= results.epargne.finalAmount) return 'immo'
+  return 'epargne'
+}
+
 export function calculateResults(params: SimulationParams): SimulationResults {
   const { monthlyDeposit, initialCapital, years } = params
 

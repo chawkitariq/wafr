@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { monthlyDeposit, initialCapital, years, results, copied, copyLink } = useSimulator()
 
 useSeoMeta({
@@ -44,7 +44,7 @@ useSeoMeta({
           wafr.ma
         </span>
         <span class="text-xs text-muted">
-          {{ new Date().toLocaleDateString('fr-MA') }}
+          {{ new Date().toLocaleDateString(locale === 'ar' ? 'ar-MA' : 'fr-MA') }}
         </span>
       </div>
 

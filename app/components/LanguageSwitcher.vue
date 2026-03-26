@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { LOCALES } from '~/utils/constants'
+
 const { locale, setLocale } = useI18n()
 
 function toggle() {
-  setLocale(locale.value === 'fr' ? 'ar' : 'fr')
+  setLocale(locale.value === LOCALES.FR ? LOCALES.AR : LOCALES.FR)
 }
 </script>
 
@@ -14,6 +16,6 @@ function toggle() {
     class="font-medium tracking-wide"
     @click="toggle"
   >
-    {{ locale === 'fr' ? 'العربية' : 'Français' }}
+    {{ locale === LOCALES.FR ? 'العربية' : 'Français' }}
   </UButton>
 </template>

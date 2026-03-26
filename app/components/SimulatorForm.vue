@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { formatMAD } from '~/utils/formatting'
+import { SIMULATOR_BOUNDS } from '~/utils/constants'
+
 const props = defineProps<{
   monthlyDeposit: number
   initialCapital: number
@@ -12,10 +15,6 @@ const emit = defineEmits<{
 }>()
 
 const { t } = useI18n()
-
-function formatMAD(value: number) {
-  return new Intl.NumberFormat('fr-MA').format(value) + ' MAD'
-}
 </script>
 
 <template>
@@ -39,15 +38,15 @@ function formatMAD(value: number) {
         </div>
         <USlider
           :model-value="props.monthlyDeposit"
-          :min="100"
-          :max="20000"
-          :step="100"
+          :min="SIMULATOR_BOUNDS.monthly.min"
+          :max="SIMULATOR_BOUNDS.monthly.max"
+          :step="SIMULATOR_BOUNDS.monthly.step"
           color="primary"
-          @update:model-value="emit('update:monthlyDeposit', $event)"
+          @update:model-value="v => emit('update:monthlyDeposit', v ?? props.monthlyDeposit)"
         />
         <div class="flex justify-between text-xs text-muted">
-          <span>100 MAD</span>
-          <span>20 000 MAD</span>
+          <span>{{ formatMAD(SIMULATOR_BOUNDS.monthly.min) }}</span>
+          <span>{{ formatMAD(SIMULATOR_BOUNDS.monthly.max) }}</span>
         </div>
       </div>
 
@@ -63,15 +62,15 @@ function formatMAD(value: number) {
         </div>
         <USlider
           :model-value="props.initialCapital"
-          :min="0"
-          :max="200000"
-          :step="1000"
+          :min="SIMULATOR_BOUNDS.capital.min"
+          :max="SIMULATOR_BOUNDS.capital.max"
+          :step="SIMULATOR_BOUNDS.capital.step"
           color="primary"
-          @update:model-value="emit('update:initialCapital', $event)"
+          @update:model-value="v => emit('update:initialCapital', v ?? props.initialCapital)"
         />
         <div class="flex justify-between text-xs text-muted">
-          <span>0 MAD</span>
-          <span>200 000 MAD</span>
+          <span>{{ formatMAD(SIMULATOR_BOUNDS.capital.min) }}</span>
+          <span>{{ formatMAD(SIMULATOR_BOUNDS.capital.max) }}</span>
         </div>
       </div>
 
@@ -87,15 +86,15 @@ function formatMAD(value: number) {
         </div>
         <USlider
           :model-value="props.years"
-          :min="1"
-          :max="30"
-          :step="1"
+          :min="SIMULATOR_BOUNDS.years.min"
+          :max="SIMULATOR_BOUNDS.years.max"
+          :step="SIMULATOR_BOUNDS.years.step"
           color="primary"
-          @update:model-value="emit('update:years', $event)"
+          @update:model-value="v => emit('update:years', v ?? props.years)"
         />
         <div class="flex justify-between text-xs text-muted">
-          <span>1 {{ t('simulator.yearsUnit', 1) }}</span>
-          <span>30 {{ t('simulator.yearsUnit', 30) }}</span>
+          <span>{{ SIMULATOR_BOUNDS.years.min }} {{ t('simulator.yearsUnit', SIMULATOR_BOUNDS.years.min) }}</span>
+          <span>{{ SIMULATOR_BOUNDS.years.max }} {{ t('simulator.yearsUnit', SIMULATOR_BOUNDS.years.max) }}</span>
         </div>
       </div>
     </div>

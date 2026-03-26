@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import type { SimulationResults } from '~/utils/simulator'
+import { getBestScenario } from '~/utils/simulator'
+import type { SimulationResults, ScenarioKey } from '~/utils/simulator'
+import { SCENARIO_CONFIG } from '~/utils/constants'
+import { formatMAD } from '~/utils/formatting'
 
 const props = defineProps<{
   results: SimulationResults
@@ -8,49 +11,17 @@ const props = defineProps<{
 
 const { t } = useI18n()
 
-function formatMAD(value: number) {
-  return new Intl.NumberFormat('fr-MA').format(Math.round(value))
-}
+const scenarios = computed(() =>
+  (Object.keys(SCENARIO_CONFIG) as ScenarioKey[]).map(key => ({
+    key,
+    label: t(`scenarios.${key}`),
+    rate: t(`scenarios.${key}Rate`),
+    result: props.results[key],
+    ...SCENARIO_CONFIG[key]
+  }))
+)
 
-const scenarios = computed(() => [
-  {
-    key: 'bvc',
-    label: t('scenarios.bvc'),
-    rate: t('scenarios.bvcRate'),
-    result: props.results.bvc,
-    color: 'text-emerald-600 dark:text-emerald-400',
-    bg: 'bg-emerald-50 dark:bg-emerald-950/30',
-    border: 'ring-emerald-200 dark:ring-emerald-800',
-    icon: 'i-lucide-trending-up'
-  },
-  {
-    key: 'immo',
-    label: t('scenarios.immo'),
-    rate: t('scenarios.immoRate'),
-    result: props.results.immo,
-    color: 'text-blue-600 dark:text-blue-400',
-    bg: 'bg-blue-50 dark:bg-blue-950/30',
-    border: 'ring-blue-200 dark:ring-blue-800',
-    icon: 'i-lucide-building-2'
-  },
-  {
-    key: 'epargne',
-    label: t('scenarios.epargne'),
-    rate: t('scenarios.epargneRate'),
-    result: props.results.epargne,
-    color: 'text-amber-600 dark:text-amber-400',
-    bg: 'bg-amber-50 dark:bg-amber-950/30',
-    border: 'ring-amber-200 dark:ring-amber-800',
-    icon: 'i-lucide-piggy-bank'
-  }
-])
-
-const bestKey = computed(() => {
-  const r = props.results
-  if (r.bvc.finalAmount >= r.immo.finalAmount && r.bvc.finalAmount >= r.epargne.finalAmount) return 'bvc'
-  if (r.immo.finalAmount >= r.epargne.finalAmount) return 'immo'
-  return 'epargne'
-})
+const bestKey = computed(() => getBestScenario(props.results))
 </script>
 
 <template>
@@ -64,12 +35,12 @@ const bestKey = computed(() => {
         v-for="s in scenarios"
         :key="s.key"
         class="relative rounded-xl p-4 ring-1 transition-all"
-        :class="[s.bg, s.border]"
+        :class="[s.bg, s.ring]"
       >
         <!-- Badge meilleure option -->
         <div
           v-if="s.key === bestKey"
-          class="absolute -top-2.5 start-4 rounded-full bg-emerald-500 px-2 py-0.5 text-xs font-semibold text-white"
+          class="absolute -top-2.5 inset-s-4 rounded-full bg-emerald-500 px-2 py-0.5 text-xs font-semibold text-white"
         >
           {{ t('results.bestOption') }}
         </div>
@@ -102,18 +73,18 @@ const bestKey = computed(() => {
           {{ formatMAD(s.result.finalAmount) }}
         </p>
         <p class="mb-3 text-xs text-muted">
-          {{ t('results.finalAmount') }} · MAD
+          {{ t('results.finalAmount') }}
         </p>
 
         <!-- Métriques secondaires -->
         <div
           class="space-y-1.5 border-t pt-3"
-          :class="s.border.replace('ring-', 'border-')"
+          :class="s.border"
         >
           <div class="flex justify-between text-xs">
             <span class="text-muted">{{ t('results.invested') }}</span>
             <span class="font-medium tabular-nums text-default">
-              {{ formatMAD(s.result.totalInvested) }} MAD
+              {{ formatMAD(s.result.totalInvested) }}
             </span>
           </div>
           <div class="flex justify-between text-xs">
@@ -122,7 +93,7 @@ const bestKey = computed(() => {
               class="font-semibold tabular-nums"
               :class="s.color"
             >
-              +{{ formatMAD(s.result.gains) }} MAD
+              +{{ formatMAD(s.result.gains) }}
             </span>
           </div>
           <div class="flex justify-between text-xs">

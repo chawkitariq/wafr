@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { SimulationResults } from '~/utils/simulator'
+import type { TooltipItem } from 'chart.js'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,6 +12,8 @@ import {
   Filler
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
+import { SCENARIO_CONFIG } from '~/utils/constants'
+import { formatMAD } from '~/utils/formatting'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler)
 
@@ -21,9 +24,8 @@ const props = defineProps<{
 
 const { t } = useI18n()
 
-function formatMAD(value: number) {
-  return new Intl.NumberFormat('fr-MA').format(Math.round(value)) + ' MAD'
-}
+const K = 1_000
+const M = 1_000_000
 
 const chartData = computed(() => {
   const data = props.results.yearlyData
@@ -33,7 +35,7 @@ const chartData = computed(() => {
       {
         label: t('scenarios.bvc'),
         data: data.map(d => d.bvc),
-        borderColor: '#10b981',
+        borderColor: SCENARIO_CONFIG.bvc.hex,
         borderWidth: 2.5,
         tension: 0.4,
         pointRadius: 0,
@@ -42,7 +44,7 @@ const chartData = computed(() => {
       {
         label: t('scenarios.immo'),
         data: data.map(d => d.immo),
-        borderColor: '#3b82f6',
+        borderColor: SCENARIO_CONFIG.immo.hex,
         borderWidth: 2.5,
         tension: 0.4,
         pointRadius: 0,
@@ -51,7 +53,7 @@ const chartData = computed(() => {
       {
         label: t('scenarios.epargne'),
         data: data.map(d => d.epargne),
-        borderColor: '#f59e0b',
+        borderColor: SCENARIO_CONFIG.epargne.hex,
         borderWidth: 2.5,
         tension: 0.4,
         pointRadius: 0,
@@ -84,8 +86,8 @@ const chartOptions = computed(() => ({
     },
     tooltip: {
       callbacks: {
-        title: (items: any[]) => t('chart.year', { n: items[0].label }),
-        label: (item: any) => ` ${item.dataset.label}: ${formatMAD(item.raw)}`
+        title: (items: TooltipItem<'line'>[]) => t('chart.year', { n: items[0]?.label }),
+        label: (item: TooltipItem<'line'>) => ` ${item.dataset.label}: ${formatMAD(item.raw as number)}`
       }
     }
   },
@@ -101,8 +103,8 @@ const chartOptions = computed(() => ({
         font: { size: 10 },
         callback: (value: number | string) => {
           const v = Number(value)
-          if (v >= 1_000_000) return (v / 1_000_000).toFixed(1) + 'M'
-          if (v >= 1_000) return Math.round(v / 1_000) + 'k'
+          if (v >= M) return (v / M).toFixed(1) + 'M'
+          if (v >= K) return Math.round(v / K) + 'k'
           return String(v)
         }
       }
@@ -118,7 +120,10 @@ const chartOptions = computed(() => ({
     </h3>
     <ClientOnly>
       <div class="h-72 w-full sm:h-96">
-        <Line :data="chartData" :options="chartOptions" />
+        <Line
+          :data="chartData"
+          :options="chartOptions"
+        />
       </div>
       <template #fallback>
         <div class="flex h-72 items-center justify-center">
