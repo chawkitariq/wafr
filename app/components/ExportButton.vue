@@ -20,15 +20,14 @@ async function exportPng() {
     const canvas = await html2canvas(el, {
       scale: 2,
       useCORS: true,
-      backgroundColor: null,
+      backgroundColor: null
     })
     const link = document.createElement('a')
     const date = new Date().toISOString().split('T')[0]
     link.download = `wafr-simulation-${date}.png`
     link.href = canvas.toDataURL('image/png')
     link.click()
-  }
-  finally {
+  } finally {
     exporting.value = false
   }
 }

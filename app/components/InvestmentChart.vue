@@ -39,38 +39,38 @@ const chartOption = computed(() => {
           </div>`
         })
         return html
-      },
+      }
     },
     legend: {
       bottom: 0,
       itemWidth: 14,
       itemHeight: 3,
-      textStyle: { fontSize: 11 },
+      textStyle: { fontSize: 11 }
     },
     grid: {
       top: 16,
       bottom: 56,
       left: isRtl.value ? 20 : 16,
       right: isRtl.value ? 16 : 20,
-      containLabel: true,
+      containLabel: true
     },
     xAxis: {
       type: 'category',
       data: years,
       axisLabel: {
         fontSize: 11,
-        formatter: (val: number) => val === 0 ? '0' : `${val}`,
+        formatter: (val: number) => val === 0 ? '0' : `${val}`
       },
       axisLine: { lineStyle: { color: '#e5e7eb' } },
-      axisTick: { show: false },
+      axisTick: { show: false }
     },
     yAxis: {
       type: 'value',
       axisLabel: {
         fontSize: 10,
-        formatter: formatNumber,
+        formatter: formatNumber
       },
-      splitLine: { lineStyle: { color: '#f3f4f6', type: 'dashed' } },
+      splitLine: { lineStyle: { color: '#f3f4f6', type: 'dashed' } }
     },
     series: [
       {
@@ -81,7 +81,7 @@ const chartOption = computed(() => {
         color: '#10b981',
         lineStyle: { width: 2.5 },
         symbol: 'none',
-        emphasis: { focus: 'series' },
+        emphasis: { focus: 'series' }
       },
       {
         name: t('scenarios.immo'),
@@ -91,7 +91,7 @@ const chartOption = computed(() => {
         color: '#3b82f6',
         lineStyle: { width: 2.5 },
         symbol: 'none',
-        emphasis: { focus: 'series' },
+        emphasis: { focus: 'series' }
       },
       {
         name: t('scenarios.epargne'),
@@ -101,7 +101,7 @@ const chartOption = computed(() => {
         color: '#f59e0b',
         lineStyle: { width: 2.5 },
         symbol: 'none',
-        emphasis: { focus: 'series' },
+        emphasis: { focus: 'series' }
       },
       {
         name: t('chart.invested'),
@@ -112,9 +112,9 @@ const chartOption = computed(() => {
         lineStyle: { width: 1.5, type: 'dashed' },
         areaStyle: { color: 'rgba(156,163,175,0.08)' },
         symbol: 'none',
-        emphasis: { focus: 'series' },
-      },
-    ],
+        emphasis: { focus: 'series' }
+      }
+    ]
   }
 })
 </script>
@@ -133,7 +133,10 @@ const chartOption = computed(() => {
       />
       <template #fallback>
         <div class="flex h-72 items-center justify-center">
-          <UIcon name="i-lucide-loader-circle" class="size-6 animate-spin text-muted" />
+          <UIcon
+            name="i-lucide-loader-circle"
+            class="size-6 animate-spin text-muted"
+          />
         </div>
       </template>
     </ClientOnly>

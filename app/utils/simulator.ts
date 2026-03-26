@@ -1,7 +1,7 @@
 export const RATES = {
   bvc: 0.09,
   immo: 0.06,
-  epargne: 0.035,
+  epargne: 0.035
 } as const
 
 export type ScenarioKey = keyof typeof RATES
@@ -61,7 +61,7 @@ function buildResult(finalBalance: number, totalInvested: number): ScenarioResul
     totalInvested: Math.round(totalInvested),
     gains: Math.round(gains),
     multiplier: Math.round(multiplier * 10) / 10,
-    gainPercent: Math.round(totalInvested > 0 ? (gains / totalInvested) * 100 : 0),
+    gainPercent: Math.round(totalInvested > 0 ? (gains / totalInvested) * 100 : 0)
   }
 }
 
@@ -79,7 +79,7 @@ export function calculateResults(params: SimulationParams): SimulationResults {
       bvc: Math.round(bvcBalances[y]),
       immo: Math.round(immoBalances[y]),
       epargne: Math.round(epargneBalances[y]),
-      invested: Math.round(initialCapital + monthlyDeposit * 12 * y),
+      invested: Math.round(initialCapital + monthlyDeposit * 12 * y)
     })
   }
 
@@ -89,6 +89,6 @@ export function calculateResults(params: SimulationParams): SimulationResults {
     bvc: buildResult(bvcBalances[years], totalInvested),
     immo: buildResult(immoBalances[years], totalInvested),
     epargne: buildResult(epargneBalances[years], totalInvested),
-    yearlyData,
+    yearlyData
   }
 }

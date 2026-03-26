@@ -6,13 +6,12 @@ useSeoMeta({
   title: 'Wafr — Simulateur d\'investissement marocain',
   description: 'Comparez BVC, immobilier et épargne bancaire. Calculez vos intérêts composés sur le marché marocain.',
   ogTitle: 'Wafr وفر — Simulateur d\'investissement',
-  ogDescription: 'Comparez BVC, immobilier et épargne bancaire. Calculez vos intérêts composés.',
+  ogDescription: 'Comparez BVC, immobilier et épargne bancaire. Calculez vos intérêts composés.'
 })
 </script>
 
 <template>
   <div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
-
     <!-- Hero -->
     <div class="mb-10 text-center">
       <div class="mb-2 flex items-center justify-center gap-3">
@@ -49,19 +48,27 @@ useSeoMeta({
         </span>
       </div>
 
-      <ResultCards :results="results" :years="years" />
-      <InvestmentChart :results="results" :years="years" />
+      <ResultCards
+        :results="results"
+        :years="years"
+      />
+      <InvestmentChart
+        :results="results"
+        :years="years"
+      />
     </div>
 
     <!-- Actions -->
     <div class="mt-6 flex flex-wrap items-center gap-3">
-      <ExportButton :copied="copied" @copy-link="copyLink" />
+      <ExportButton
+        :copied="copied"
+        @copy-link="copyLink"
+      />
     </div>
 
     <!-- Disclaimer -->
     <p class="mt-8 text-center text-xs leading-relaxed text-muted">
       {{ t('app.disclaimer') }}
     </p>
-
   </div>
 </template>

@@ -28,7 +28,7 @@ export const useSimulator = () => {
     calculateResults({
       monthlyDeposit: monthlyDeposit.value,
       initialCapital: initialCapital.value,
-      years: years.value,
+      years: years.value
     })
   )
 
@@ -47,6 +47,6 @@ export const useSimulator = () => {
     years,
     results,
     copied,
-    copyLink,
+    copyLink
   }
 }

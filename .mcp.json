@@ -15,6 +15,11 @@
         "@playwright/mcp@latest"
       ],
       "env": {}
-    }
+    },
+    "ESLint": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["@eslint/mcp@latest"]
+		}
   }
 }
