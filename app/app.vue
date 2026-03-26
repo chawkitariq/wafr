@@ -34,9 +34,9 @@ useHead({
     </UMain>
 
     <UFooter>
-      <template #left>
+      <template #default>
         <p class="text-sm text-muted">
-          © {{ new Date().getFullYear() }} Wafr — wafr.ma
+          © {{ new Date().getFullYear() }} Wafr — wafr.chawkitariq.fr
         </p>
       </template>
     </UFooter>

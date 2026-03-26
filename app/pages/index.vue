@@ -41,7 +41,7 @@ useSeoMeta({
       <!-- Watermark pour l'export -->
       <div class="flex items-center justify-between">
         <span class="text-xs font-semibold tracking-widest text-muted uppercase">
-          wafr.ma
+          wafr.chawkitariq.fr
         </span>
         <span class="text-xs text-muted">
           {{ new Date().toLocaleDateString(locale === 'ar' ? 'ar-MA' : 'fr-MA') }}

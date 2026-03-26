@@ -2,7 +2,7 @@
 
 A bilingual (FR/AR) savings & investment simulator for the Moroccan market. Compare three investment vehicles — Casablanca Stock Exchange, real estate, and bank savings — and visualize the power of compound interest over time.
 
-**Live:** [wafr.ma](https://wafr.ma) &nbsp;|&nbsp; **Stack:** Nuxt 3, TypeScript, Nuxt UI, ECharts, PWA
+**Live:** [wafr.chawkitariq.fr](https://wafr.chawkitariq.fr) &nbsp;|&nbsp; **Stack:** Nuxt 3, TypeScript, Nuxt UI, ECharts, PWA
 
 ---
 
