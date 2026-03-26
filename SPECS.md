@@ -4,8 +4,8 @@
 
 Wafr (وفر) est un simulateur d'épargne et d'investissement pédagogique
 pour le marché marocain. Il aide les Marocains à comprendre la puissance
-des intérêts composés en comparant trois véhicules accessibles : Bourse
-de Casablanca, immobilier, épargne bancaire. Bilingue FR/AR, installable
+des intérêts composés en comparant deux véhicules accessibles : Bourse
+de Casablanca et immobilier. Bilingue FR/AR, installable
 comme PWA, exportable en image pour une viralité WhatsApp/Instagram.
 
 ---
@@ -19,7 +19,7 @@ comme PWA, exportable en image pour une viralité WhatsApp/Instagram.
 |---------|-------------|--------|
 | F1 | Simulateur principal (sliders, calcul temps réel) | Terminé |
 | F2 | Graphique interactif ECharts | Terminé |
-| F3 | Cartes résultats (3 scénarios) | Terminé |
+| F3 | Cartes résultats (2 scénarios) | Terminé |
 | F4 | Bilingue FR/AR avec RTL | Terminé |
 | F5 | Export PNG (html-to-image) | Terminé |
 | F6 | Partage via URL (query params) | Terminé |
@@ -52,9 +52,8 @@ comme PWA, exportable en image pour une viralité WhatsApp/Instagram.
 
 ```typescript
 export const RATES = {
-  bvc: 0.09,       // Bourse de Casablanca — moyenne historique 2015-2024
-  immo: 0.06,      // Immobilier Casablanca — moyenne historique 2015-2024
-  epargne: 0.035,  // Épargne bancaire — taux moyen Maroc 2024
+  bvc: 0.09,   // Bourse de Casablanca — moyenne historique 2015-2024
+  immo: 0.06,  // Immobilier Casablanca — moyenne historique 2015-2024
 }
 ```
 
@@ -88,7 +87,7 @@ wafr/
 ├── app/
 │   ├── components/
 │   │   ├── SimulatorForm.vue      # Sliders de saisie
-│   │   ├── ResultCards.vue        # 3 cartes résultats
+│   │   ├── ResultCards.vue        # 2 cartes résultats
 │   │   ├── InvestmentChart.vue    # Graphique ECharts
 │   │   ├── ExportButton.vue       # Bouton export PNG
 │   │   └── LanguageSwitcher.vue   # Bascule FR/AR

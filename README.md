@@ -1,6 +1,6 @@
 # Wafr — وفر
 
-A bilingual (FR/AR) savings & investment simulator for the Moroccan market. Compare three investment vehicles — Casablanca Stock Exchange, real estate, and bank savings — and visualize the power of compound interest over time.
+A bilingual (FR/AR) savings & investment simulator for the Moroccan market. Compare two investment vehicles — Casablanca Stock Exchange and real estate — and visualize the power of compound interest over time.
 
 **Live:** [wafr.chawkitariq.fr](https://wafr.chawkitariq.fr) &nbsp;|&nbsp; **Stack:** Nuxt 3, TypeScript, Nuxt UI, ECharts, PWA
 
@@ -9,7 +9,7 @@ A bilingual (FR/AR) savings & investment simulator for the Moroccan market. Comp
 ## What it does
 
 - Input your monthly deposit, initial capital, and time horizon using sliders
-- See real-time projections across 3 scenarios (BVC 9%, Immobilier 6%, Épargne 3.5%)
+- See real-time projections across 2 scenarios (BVC 9%, Immobilier 6%)
 - Switch between French and Arabic (RTL) with one click
 - Export results as a PNG image to share on WhatsApp/Instagram
 - Share your simulation via URL (query params, no account needed)

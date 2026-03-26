@@ -37,16 +37,14 @@ test.describe('Result cards', () => {
     await page.goto('/')
   })
 
-  test('shows all three scenario cards', async ({ page }) => {
+  test('shows both scenario cards', async ({ page }) => {
     await expect(page.getByText('Bourse de Casablanca', { exact: true })).toBeVisible()
     await expect(page.getByText('Immobilier', { exact: true })).toBeVisible()
-    await expect(page.getByText('Épargne bancaire', { exact: true })).toBeVisible()
   })
 
   test('shows rates on each card', async ({ page }) => {
     await expect(page.getByText('9 %/an')).toBeVisible()
     await expect(page.getByText('6 %/an')).toBeVisible()
-    await expect(page.getByText('3,5 %/an')).toBeVisible()
   })
 
   test('BVC card has "Meilleure option" badge (highest rate wins by default)', async ({ page }) => {
@@ -54,9 +52,9 @@ test.describe('Result cards', () => {
   })
 
   test('cards show Capital final, Gains, Multiplicateur labels', async ({ page }) => {
-    await expect(page.getByText('Capital final')).toHaveCount(3)
-    await expect(page.getByText('Gains')).toHaveCount(3)
-    await expect(page.getByText('Multiplicateur')).toHaveCount(3)
+    await expect(page.getByText('Capital final')).toHaveCount(2)
+    await expect(page.getByText('Gains')).toHaveCount(2)
+    await expect(page.getByText('Multiplicateur')).toHaveCount(2)
   })
 })
 

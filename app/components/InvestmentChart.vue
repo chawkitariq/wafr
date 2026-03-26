@@ -52,15 +52,6 @@ const chartData = computed(() => {
         pointHoverRadius: 4
       },
       {
-        label: t('scenarios.epargne'),
-        data: data.map(d => d.epargne),
-        borderColor: SCENARIO_CONFIG.epargne.hex,
-        borderWidth: 2.5,
-        tension: 0.4,
-        pointRadius: 0,
-        pointHoverRadius: 4
-      },
-      {
         // Dashed "total invested" baseline — fill shades the area below it so users
         // can visually compare compounded growth against simple capital injection
         label: t('chart.invested'),

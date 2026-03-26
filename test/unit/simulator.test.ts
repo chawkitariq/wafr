@@ -6,8 +6,7 @@ describe('calculateResults', () => {
     it('calcule les montants finaux pour 10 ans', () => {
       const results = calculateResults({ monthlyDeposit: 1000, initialCapital: 10000, years: 10 })
       expect(results.bvc.finalAmount).toBeGreaterThan(results.immo.finalAmount)
-      expect(results.immo.finalAmount).toBeGreaterThan(results.epargne.finalAmount)
-      expect(results.epargne.finalAmount).toBeGreaterThan(results.bvc.totalInvested)
+      expect(results.immo.finalAmount).toBeGreaterThan(results.bvc.totalInvested)
     })
 
     it('retourne le bon capital total investi', () => {
@@ -15,20 +14,17 @@ describe('calculateResults', () => {
       // 10000 + 1000 * 12 * 10 = 130 000
       expect(results.bvc.totalInvested).toBe(130000)
       expect(results.immo.totalInvested).toBe(130000)
-      expect(results.epargne.totalInvested).toBe(130000)
     })
 
     it('les gains sont positifs', () => {
       const results = calculateResults({ monthlyDeposit: 500, initialCapital: 5000, years: 5 })
       expect(results.bvc.gains).toBeGreaterThan(0)
       expect(results.immo.gains).toBeGreaterThan(0)
-      expect(results.epargne.gains).toBeGreaterThan(0)
     })
 
-    it('le multiplicateur BVC est > multiplicateur immo > multiplicateur épargne', () => {
+    it('le multiplicateur BVC est > multiplicateur immo', () => {
       const results = calculateResults({ monthlyDeposit: 1000, initialCapital: 0, years: 20 })
       expect(results.bvc.multiplier).toBeGreaterThan(results.immo.multiplier)
-      expect(results.immo.multiplier).toBeGreaterThan(results.epargne.multiplier)
     })
 
     it('retourne yearlyData avec year+1 entrées', () => {
@@ -42,7 +38,6 @@ describe('calculateResults', () => {
       const results = calculateResults({ monthlyDeposit: 1000, initialCapital: 5000, years: 5 })
       expect(results.yearlyData[0].bvc).toBe(5000)
       expect(results.yearlyData[0].immo).toBe(5000)
-      expect(results.yearlyData[0].epargne).toBe(5000)
       expect(results.yearlyData[0].invested).toBe(5000)
     })
   })
@@ -78,11 +73,9 @@ describe('calculateResults', () => {
       const results = calculateResults({ monthlyDeposit: 333, initialCapital: 7777, years: 7 })
       expect(results.bvc.finalAmount % 1).toBe(0)
       expect(results.immo.gains % 1).toBe(0)
-      expect(results.epargne.finalAmount % 1).toBe(0)
       results.yearlyData.forEach((snap) => {
         expect(snap.bvc % 1).toBe(0)
         expect(snap.immo % 1).toBe(0)
-        expect(snap.epargne % 1).toBe(0)
         expect(snap.invested % 1).toBe(0)
       })
     })
@@ -107,10 +100,10 @@ describe('calculateResults', () => {
       expect(results.bvc.finalAmount).toBe(Math.round(expected))
     })
 
-    it('vérifie le taux épargne sur 1 an sans versement', () => {
+    it('vérifie le taux immo sur 1 an sans versement', () => {
       const results = calculateResults({ monthlyDeposit: 0, initialCapital: 100000, years: 1 })
-      const expected = 100000 * Math.pow(1 + RATES.epargne / 12, 12)
-      expect(results.epargne.finalAmount).toBe(Math.round(expected))
+      const expected = 100000 * Math.pow(1 + RATES.immo / 12, 12)
+      expect(results.immo.finalAmount).toBe(Math.round(expected))
     })
   })
 })

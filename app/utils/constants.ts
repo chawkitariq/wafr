@@ -33,15 +33,8 @@ export const SCENARIO_CONFIG: Record<ScenarioKey, ScenarioStyle> = {
     border: 'border-blue-200 dark:border-blue-800',
     hex: '#3b82f6',
     icon: 'i-lucide-building-2'
-  },
-  epargne: {
-    color: 'text-amber-600 dark:text-amber-400',
-    bg: 'bg-amber-50 dark:bg-amber-950/30',
-    ring: 'ring-amber-200 dark:ring-amber-800',
-    border: 'border-amber-200 dark:border-amber-800',
-    hex: '#f59e0b',
-    icon: 'i-lucide-piggy-bank'
   }
+
 }
 
 export const LOCALES = { FR: 'fr', AR: 'ar' } as const

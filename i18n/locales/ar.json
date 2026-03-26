@@ -17,10 +17,8 @@
   "scenarios": {
     "bvc": "بورصة الدار البيضاء",
     "immo": "العقار",
-    "epargne": "الادخار البنكي",
     "bvcRate": "9%/سنة",
-    "immoRate": "6%/سنة",
-    "epargneRate": "3,5%/سنة"
+    "immoRate": "6%/سنة"
   },
   "results": {
     "title": "النتائج بعد {years} سنوات",

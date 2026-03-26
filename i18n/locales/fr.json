@@ -17,10 +17,8 @@
   "scenarios": {
     "bvc": "Bourse de Casablanca",
     "immo": "Immobilier",
-    "epargne": "Épargne bancaire",
     "bvcRate": "9 %/an",
-    "immoRate": "6 %/an",
-    "epargneRate": "3,5 %/an"
+    "immoRate": "6 %/an"
   },
   "results": {
     "title": "Résultats après {years} ans",

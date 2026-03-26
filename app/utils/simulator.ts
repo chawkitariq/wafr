@@ -4,8 +4,7 @@
  */
 export const RATES = {
   bvc: 0.09, // Bourse de Casablanca — 9% historical average
-  immo: 0.06, // Casablanca real estate — 6% historical average
-  epargne: 0.035 // Moroccan bank savings account — 3.5% average 2024
+  immo: 0.06 // Casablanca real estate — 6% historical average
 } as const
 
 export type ScenarioKey = keyof typeof RATES
@@ -22,7 +21,6 @@ export interface YearlySnapshot {
   year: number
   bvc: number
   immo: number
-  epargne: number
   invested: number // Cumulative capital injected (no compounding) — used as chart baseline
 }
 
@@ -39,7 +37,6 @@ export interface ScenarioResult {
 export interface SimulationResults {
   bvc: ScenarioResult
   immo: ScenarioResult
-  epargne: ScenarioResult
   yearlyData: YearlySnapshot[]
 }
 
@@ -91,9 +88,7 @@ function buildResult(finalBalance: number, totalInvested: number): ScenarioResul
  * BVC is checked first so it wins ties (highest historical risk/reward).
  */
 export function getBestScenario(results: SimulationResults): ScenarioKey {
-  if (results.bvc.finalAmount >= results.immo.finalAmount && results.bvc.finalAmount >= results.epargne.finalAmount) return 'bvc'
-  if (results.immo.finalAmount >= results.epargne.finalAmount) return 'immo'
-  return 'epargne'
+  return results.bvc.finalAmount >= results.immo.finalAmount ? 'bvc' : 'immo'
 }
 
 /**
@@ -105,15 +100,13 @@ export function calculateResults(params: SimulationParams): SimulationResults {
 
   const bvcBalances = simulateScenario(initialCapital, monthlyDeposit, years, RATES.bvc)
   const immoBalances = simulateScenario(initialCapital, monthlyDeposit, years, RATES.immo)
-  const epargneBalances = simulateScenario(initialCapital, monthlyDeposit, years, RATES.epargne)
 
   const yearlyData: YearlySnapshot[] = []
   for (let y = 0; y <= years; y++) {
     yearlyData.push({
       year: y,
-      bvc: Math.round(bvcBalances[y]),
-      immo: Math.round(immoBalances[y]),
-      epargne: Math.round(epargneBalances[y]),
+      bvc: Math.round(bvcBalances[y]!),
+      immo: Math.round(immoBalances[y]!),
       invested: Math.round(initialCapital + monthlyDeposit * 12 * y)
     })
   }
@@ -121,9 +114,8 @@ export function calculateResults(params: SimulationParams): SimulationResults {
   const totalInvested = initialCapital + monthlyDeposit * 12 * years
 
   return {
-    bvc: buildResult(bvcBalances[years], totalInvested),
-    immo: buildResult(immoBalances[years], totalInvested),
-    epargne: buildResult(epargneBalances[years], totalInvested),
+    bvc: buildResult(bvcBalances[years]!, totalInvested),
+    immo: buildResult(immoBalances[years]!, totalInvested),
     yearlyData
   }
 }
