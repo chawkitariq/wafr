@@ -30,7 +30,7 @@ const bestKey = computed(() => getBestScenario(props.results))
       {{ t('results.title', { years }) }}
     </h2>
 
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div
         v-for="s in scenarios"
         :key="s.key"
