@@ -5,7 +5,13 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/i18n',
     '@vite-pwa/nuxt',
-    '@nuxt/test-utils/module'
+    '@nuxt/test-utils/module',
+    ['@nuxtjs/robots', {
+      groups: [
+        { userAgent: ['*'], allow: ['/'] }
+      ]
+    }],
+    '@nuxtjs/sitemap'
   ],
 
   devtools: {
@@ -13,6 +19,10 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  site: {
+    url: 'https://wafr.chawkitariq.fr'
+  },
 
   ui: {
     colorMode: false

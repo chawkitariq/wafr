@@ -6,7 +6,12 @@ useHead({
     lang: () => locale.value,
     dir: () => locale.value === 'ar' ? 'rtl' : 'ltr'
   },
-  link: [{ rel: 'icon', href: '/favicon.ico' }],
+  link: [
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'alternate', hreflang: 'fr-MA', href: 'https://wafr.chawkitariq.fr' },
+    { rel: 'alternate', hreflang: 'ar-MA', href: 'https://wafr.chawkitariq.fr' },
+    { rel: 'alternate', hreflang: 'x-default', href: 'https://wafr.chawkitariq.fr' }
+  ],
   meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }]
 })
 </script>

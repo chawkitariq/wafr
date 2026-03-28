@@ -3,10 +3,10 @@ const { t, locale } = useI18n()
 const { monthlyDeposit, initialCapital, years, results, copied, copyLink } = useSimulator()
 
 useSeoMeta({
-  title: 'Wafr — Simulateur d\'investissement marocain',
-  description: 'Comparez BVC, immobilier et épargne bancaire. Calculez vos intérêts composés sur le marché marocain.',
-  ogTitle: 'Wafr وفر — Simulateur d\'investissement',
-  ogDescription: 'Comparez BVC, immobilier et épargne bancaire. Calculez vos intérêts composés.'
+  title: () => t('seo.title'),
+  description: () => t('seo.description'),
+  ogTitle: () => t('seo.ogTitle'),
+  ogDescription: () => t('seo.ogDescription')
 })
 </script>
 

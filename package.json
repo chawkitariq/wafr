@@ -16,6 +16,8 @@
     "@iconify-json/simple-icons": "^1.2.74",
     "@nuxt/ui": "^4.5.1",
     "@nuxtjs/i18n": "10.2.3",
+    "@nuxtjs/robots": "6.0.6",
+    "@nuxtjs/sitemap": "8.0.9",
     "@vite-pwa/nuxt": "1.1.1",
     "chart.js": "^4.5.1",
     "html-to-image": "^1.11.13",
