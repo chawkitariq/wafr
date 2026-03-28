@@ -21,10 +21,6 @@ export default defineNuxtConfig({
     name: 'Wafr'
   },
 
-  ui: {
-    colorMode: false
-  },
-
   routeRules: {
     '/': { prerender: true }
   },

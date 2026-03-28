@@ -31,7 +31,12 @@ useHead({
 
       <template #right>
         <LanguageSwitcher />
-        <UColorModeButton />
+        <ClientOnly>
+          <UColorModeButton />
+          <template #fallback>
+            <UButton loading variant="ghost" color="neutral" />
+          </template>
+        </ClientOnly>
       </template>
     </UHeader>
 
