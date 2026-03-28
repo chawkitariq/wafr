@@ -8,6 +8,34 @@ useSeoMeta({
   ogTitle: () => t('seo.ogTitle'),
   ogDescription: () => t('seo.ogDescription')
 })
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        'name': 'Wafr وفر',
+        'url': 'https://wafr.chawkitariq.fr',
+        'description': 'Simulateur d\'épargne et d\'investissement pour le marché marocain. Comparez la Bourse de Casablanca et l\'immobilier grâce aux intérêts composés.',
+        'applicationCategory': 'FinanceApplication',
+        'operatingSystem': 'Web, iOS, Android',
+        'inLanguage': ['fr-MA', 'ar-MA'],
+        'offers': {
+          '@type': 'Offer',
+          'price': '0',
+          'priceCurrency': 'MAD'
+        },
+        'publisher': {
+          '@type': 'Organization',
+          'name': 'Wafr',
+          'url': 'https://wafr.chawkitariq.fr'
+        }
+      })
+    }
+  ]
+})
 </script>
 
 <template>

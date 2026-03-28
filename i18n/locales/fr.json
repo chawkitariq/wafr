@@ -1,15 +1,15 @@
 {
   "seo": {
     "title": "Wafr — Simulateur d'investissement marocain",
-    "description": "Comparez BVC, immobilier et épargne bancaire. Calculez vos intérêts composés sur le marché marocain.",
+    "description": "Comparez BVC et immobilier. Calculez vos intérêts composés sur le marché marocain.",
     "ogTitle": "Wafr وفر — Simulateur d'investissement marocain",
-    "ogDescription": "Comparez BVC, immobilier et épargne bancaire. Calculez vos intérêts composés sur le marché marocain."
+    "ogDescription": "Comparez BVC et immobilier. Calculez vos intérêts composés sur le marché marocain."
   },
   "app": {
     "title": "Wafr",
     "tagline": "وفر",
     "subtitle": "Simulateur d'investissement marocain",
-    "description": "Comparez l'épargne bancaire, l'immobilier et la Bourse de Casablanca. Visualisez la puissance des intérêts composés.",
+    "description": "Comparez l'immobilier et la Bourse de Casablanca. Visualisez la puissance des intérêts composés.",
     "disclaimer": "Simulation à titre indicatif. Les rendements passés ne garantissent pas les rendements futurs. Taux basés sur les moyennes historiques 2015–2024."
   },
   "simulator": {
