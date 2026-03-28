@@ -6,11 +6,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@vite-pwa/nuxt',
     '@nuxt/test-utils/module',
-    ['@nuxtjs/robots', {
-      groups: [
-        { userAgent: ['*'], allow: ['/'] }
-      ]
-    }],
+    '@nuxtjs/robots',
     '@nuxtjs/sitemap'
   ],
 
@@ -21,7 +17,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   site: {
-    url: 'https://wafr.chawkitariq.fr'
+    url: 'https://wafr.chawkitariq.fr',
+    name: 'Wafr'
   },
 
   ui: {
@@ -98,5 +95,9 @@ export default defineNuxtConfig({
     devOptions: {
       enabled: true
     }
+  },
+
+  robots: {
+    sitemap: ['/sitemap.xml']
   }
 })
