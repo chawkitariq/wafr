@@ -18,31 +18,32 @@ comme PWA, exportable en image pour une viralité WhatsApp/Instagram.
 | Feature | Description | Statut |
 |---------|-------------|--------|
 | F1 | Simulateur principal (sliders, calcul temps réel) | Terminé |
-| F2 | Graphique interactif ECharts | Terminé |
+| F2 | Graphique interactif Chart.js | Terminé |
 | F3 | Cartes résultats (2 scénarios) | Terminé |
 | F4 | Bilingue FR/AR avec RTL | Terminé |
 | F5 | Export PNG (html-to-image) | Terminé |
 | F6 | Partage via URL (query params) | Terminé |
-| F7 | PWA installable + offline | En cours (icônes manquantes, tests mobiles) |
+| F7 | PWA installable + offline | Terminé |
+| F8v1 | Mode sombre / clair | Terminé |
 
 ### V2 — Extension (2-3 mois)
 **Objectif :** Monétisation freemium, 79 MAD/mois premium.
 
 | Feature | Description |
 |---------|-------------|
-| F8 | Module FOMO ("si j'avais investi avant") |
-| F9 | Mode retraite (calcul inversé, règle des 4%) |
-| F10 | Calculateur appart Casablanca |
-| F11 | Premium 79 MAD/mois |
+| F9 | Module FOMO ("si j'avais investi avant") |
+| F10 | Mode retraite (calcul inversé, règle des 4%) |
+| F11 | Calculateur appart Casablanca |
+| F12 | Premium 79 MAD/mois |
 
 ### V3 — Plateforme (6-12 mois)
 **Objectif :** Licences B2B banques marocaines, expansion Afrique francophone.
 
 | Feature | Description |
 |---------|-------------|
-| F12 | Plateforme éducation financière |
-| F13 | Partenariats B2B (CIH, Attijariwafa, Wafa Assurance) |
-| F14 | Expansion Afrique francophone |
+| F13 | Plateforme éducation financière |
+| F14 | Partenariats B2B (CIH, Attijariwafa, Wafa Assurance) |
+| F15 | Expansion Afrique francophone |
 
 ---
 
@@ -73,7 +74,7 @@ export const RATES = {
 ### Contraintes absolues
 
 2. `html-to-image` : dynamic import `() => import('html-to-image')` côté client uniquement, jamais SSR
-3. `VChart` : toujours dans `<ClientOnly>` pour éviter les erreurs SSR
+3. Chart.js (`vue-chartjs`) : pas de contrainte SSR, mais initialiser les composants Chart.js au niveau module
 4. Toutes les strings UI via `useI18n()`, jamais hardcodées dans les templates
 5. Tous les montants affichés passent par `Math.round()`
 6. Aucune logique de calcul dans les composants Vue
@@ -86,18 +87,20 @@ export const RATES = {
 wafr/
 ├── app/
 │   ├── components/
+│   │   ├── AppLogo.vue            # Logo Wafr
 │   │   ├── SimulatorForm.vue      # Sliders de saisie
 │   │   ├── ResultCards.vue        # 2 cartes résultats
-│   │   ├── InvestmentChart.vue    # Graphique ECharts
+│   │   ├── InvestmentChart.vue    # Graphique Chart.js
 │   │   ├── ExportButton.vue       # Bouton export PNG
 │   │   └── LanguageSwitcher.vue   # Bascule FR/AR
 │   ├── composables/
-│   │   ├── useSimulator.ts        # State réactif + calculs
-│   │   └── useShareUrl.ts         # Encode/decode query params
+│   │   └── useSimulator.ts        # State réactif + calculs
 │   ├── pages/
 │   │   └── index.vue              # Page principale (assemblage)
 │   └── utils/
-│       └── simulator.ts           # Fonctions pures (zéro Vue)
+│       ├── simulator.ts           # Fonctions pures de simulation (zéro Vue)
+│       ├── constants.ts           # Constantes partagées (SIMULATOR_BOUNDS, SCENARIO_CONFIG)
+│       └── formatting.ts          # Fonctions de formatage des montants
 ├── locales/
 │   ├── fr.json                    # Traductions françaises
 │   └── ar.json                    # Traductions arabes (MSA)
@@ -115,7 +118,7 @@ wafr/
 
 | Décision | Justification |
 |----------|---------------|
-| ECharts en SVG (pas canvas) | Export PNG propre via html-to-image sur un SVG |
+| Chart.js via vue-chartjs | Plus léger qu'ECharts, suffisant pour 2 courbes, pas de contrainte SSR |
 | Taux hardcodés (pas d'API BVC) | Simplicité MVP, pas de dépendance externe, révision manuelle annuelle |
 | Arabe MSA (pas darija) | Portabilité international, accessibilité aux non-marocains |
 | Query params pour le partage | Pas de base de données nécessaire, URL courte, fonctionne offline |
@@ -131,7 +134,7 @@ wafr/
 | Nuxt 3 | Framework fullstack | SSR/SSG, SEO, file-based routing |
 | TypeScript | Typage | Sécurité, maintenabilité |
 | @nuxt/ui | Composants UI | Accessibilité, Tailwind, cohérence |
-| nuxt-echarts + VChart | Graphiques | ECharts = SVG natif, parfait pour export PNG |
+| vue-chartjs + Chart.js | Graphiques | Léger, pas de contrainte SSR, suffisant pour les courbes |
 | @nuxtjs/i18n | Internationalisation | RTL automatique, lazy loading locales |
 | @vite-pwa/nuxt | PWA | Installable mobile, offline first |
 | html-to-image | Export PNG | Client-only, dynamic import, pas de serveur |

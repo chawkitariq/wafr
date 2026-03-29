@@ -4,7 +4,7 @@
 
 ## Règles absolues (ne jamais enfreindre)
 2. `html-to-image` : dynamic import `() => import('html-to-image')` client uniquement, jamais SSR
-3. `VChart` : toujours dans `<ClientOnly>`
+3. `vue-chartjs` : pas de contrainte `<ClientOnly>`, mais enregistrer les composants Chart.js au niveau module (pas dans setup)
 4. Toutes les strings UI via `useI18n()`, jamais hardcodées dans les templates
 5. Tous les montants affichés passent par `Math.round()`
 6. Aucune logique de calcul dans les composants Vue
