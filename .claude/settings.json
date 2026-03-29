@@ -24,7 +24,8 @@
     "commit-commands@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": true,
     "code-refactorer@devsforge-marketplace": true,
-    "ui-ux-pro-max@ui-ux-pro-max-skill": true
+    "ui-ux-pro-max@ui-ux-pro-max-skill": true,
+    "superpowers@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "devsforge-marketplace": {
